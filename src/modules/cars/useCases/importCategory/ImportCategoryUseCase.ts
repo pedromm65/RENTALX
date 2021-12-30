@@ -1,4 +1,4 @@
-import csvParse from "csv-parse";
+import { parse as csvParse } from "csv-parse";
 import fs from "fs";
 
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
@@ -16,7 +16,11 @@ class ImportCategoryUseCase {
             const stream = fs.createReadStream(file.path);
             const categories: IImportCategory[] = [];
 
-            const parseFile = csvParse();
+            const parseFile = csvParse({
+                delimiter: ",",
+                trim: true,
+            });
+
             stream.pipe(parseFile);
 
             parseFile
@@ -38,7 +42,19 @@ class ImportCategoryUseCase {
 
     async execute(file: Express.Multer.File): Promise<void> {
         const categories = await this.loadCategories(file);
-        console.log(categories);
+
+        categories.map(async (category) => {
+            const { name, description } = category;
+
+            const existCategory = this.categoriesRepository.findByName(name);
+
+            if (!existCategory) {
+                this.categoriesRepository.create({
+                    name,
+                    description,
+                });
+            }
+        });
     }
 }
 
