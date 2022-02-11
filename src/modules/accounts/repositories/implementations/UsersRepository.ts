@@ -10,7 +10,6 @@ class UsersRepository implements IUsersRepository {
     constructor() {
         this.repository = getRepository(User);
     }
-
     async create({
         name,
         email,
