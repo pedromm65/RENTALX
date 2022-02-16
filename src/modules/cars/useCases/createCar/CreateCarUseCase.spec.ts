@@ -1,4 +1,5 @@
 import { CarsRepositoryInMemory } from "@modules/cars/repositories/in-memory/CarsRepositoryInMemory";
+import { AppError } from "@shared/errors/App.Error";
 
 import { CreateCarUseCase } from "./CreateCarUseCase";
 
@@ -12,14 +13,54 @@ describe("Create Car", () => {
     });
 
     it("Should be able to create a new car", async () => {
-        await createCarUseCase.execute({
+        const car = await createCarUseCase.execute({
+            name: "Name Car",
+            description: "Description Car",
+            daily_rate: 100,
+            license_plate: "1234",
+            fine_amount: 40,
             brand: "Brand Car",
             category_id: "category",
-            daily_rate: 100,
-            description: "Description Car",
-            fine_amount: 40,
-            license_plate: "1234",
-            name: "Name Car",
         });
+
+        expect(car).toHaveProperty("id");
+    });
+
+    it("should not be able to create a car with exists license plate", () => {
+        expect(async () => {
+            await createCarUseCase.execute({
+                name: "Car1",
+                description: "Description Car",
+                daily_rate: 100,
+                license_plate: "1234",
+                fine_amount: 40,
+                brand: "Brand Car",
+                category_id: "category",
+            });
+
+            await createCarUseCase.execute({
+                name: "Car2",
+                description: "Description Car2",
+                daily_rate: 100,
+                license_plate: "1234",
+                fine_amount: 40,
+                brand: "Brand Car",
+                category_id: "category",
+            });
+        }).rejects.toBeInstanceOf(AppError);
+    });
+
+    it("should be able to create a car with available true by default", async () => {
+        const car = await createCarUseCase.execute({
+            name: "Car Available",
+            description: "Description Car2",
+            daily_rate: 100,
+            license_plate: "ABC-1234",
+            fine_amount: 40,
+            brand: "Brand Car",
+            category_id: "category",
+        });
+
+        expect(car.available).toBe(true);
     });
 });
