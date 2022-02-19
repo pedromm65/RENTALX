@@ -78,8 +78,6 @@ describe("List Cars", () => {
             category_id: "91ad5ca4-d81f-4541-95ef-d6adbc08e72f",
         });
 
-        console.log(cars);
-
         expect(cars).toEqual([car]);
     });
 });
