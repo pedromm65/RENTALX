@@ -9,6 +9,8 @@ describe("Create Category Controller", () => {
     beforeEach(async () => {
         const connection = await createConnection();
 
+        await connection.runMigrations();
+
         const id = uuid();
         const password = await hash("admin", 8);
 
