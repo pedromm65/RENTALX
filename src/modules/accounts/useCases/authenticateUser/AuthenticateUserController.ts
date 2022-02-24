@@ -16,7 +16,7 @@ class AuthenticateUserController {
             email,
         });
 
-        return response.json(token);
+        return response.status(201).json(token);
     }
 }
 
