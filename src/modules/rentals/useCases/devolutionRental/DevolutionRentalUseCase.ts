@@ -23,6 +23,7 @@ class DevolutionRentalUseCase {
         @inject("DayjsDateProvider")
         private dateProvider: IDateProvider
     ) {}
+
     async execute({ id, user_id }: IRequest): Promise<Rental> {
         const rental = await this.rentalsRepository.findById(id);
         const car = await this.carsRepository.findById(rental.car_id);
@@ -47,7 +48,7 @@ class DevolutionRentalUseCase {
             dateNow,
             rental.expected_return_date
         );
-
+        // 83361291-21
         let total = 0;
 
         if (delay > 0) {
