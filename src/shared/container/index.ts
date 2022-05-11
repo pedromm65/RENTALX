@@ -16,6 +16,8 @@ import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRep
 import { ISpecificationsRepository } from "@modules/cars/repositories/ISpecificationsRepository";
 import { RentalsRepository } from "@modules/rentals/infra/typeorm/repository/RentalsRepository";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
+import { IMailProvider } from "./providers/MailProvider/IMailProvider";
+import { EtherealMailProvider } from "./providers/MailProvider/implementations/EtherealMailProvider";
 
 container.registerSingleton<ICategoriesRepository>(
     "CategoriesRepository",
@@ -47,4 +49,9 @@ container.registerSingleton<IRentalsRepository>(
 container.registerSingleton<IUsersTokensRepository>(
     "UsersTokensRepository",
     UsersTokensRepository
+);
+
+container.registerSingleton<IMailProvider>(
+    "EtherealMailProvider",
+    EtherealMailProvider
 );
