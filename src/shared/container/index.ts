@@ -16,6 +16,7 @@ import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRep
 import { ISpecificationsRepository } from "@modules/cars/repositories/ISpecificationsRepository";
 import { RentalsRepository } from "@modules/rentals/infra/typeorm/repository/RentalsRepository";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
+
 import { IMailProvider } from "./providers/MailProvider/IMailProvider";
 import { EtherealMailProvider } from "./providers/MailProvider/implementations/EtherealMailProvider";
 
@@ -51,7 +52,7 @@ container.registerSingleton<IUsersTokensRepository>(
     UsersTokensRepository
 );
 
-container.registerSingleton<IMailProvider>(
+container.registerInstance<IMailProvider>(
     "EtherealMailProvider",
-    EtherealMailProvider
+    new EtherealMailProvider()
 );
