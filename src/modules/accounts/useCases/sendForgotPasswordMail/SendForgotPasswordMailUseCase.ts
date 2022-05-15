@@ -25,7 +25,7 @@ class SendForgotPasswordMailUseCase {
         if (!user) {
             throw new AppError("User does not exists!");
         }
-
+  
         const token = uuidv4();
 
         const expires_date = this.dateProvider.addHours(3);
