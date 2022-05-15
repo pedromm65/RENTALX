@@ -42,6 +42,6 @@ class SendForgotPasswordMailUseCase {
             `O link para o reset é ${token}`
         );
     }
-}
+} 
  
 export { SendForgotPasswordMailUseCase }; 
