@@ -8,7 +8,7 @@ import { IMailProvider } from "@shared/container/providers/MailProvider/IMailPro
 import { AppError } from "@shared/errors/App.Error";
 
 @injectable()
-class SendForgotPasswordMailUseCase {
+class SendForgotPasswordMailUseCase { 
     constructor(
         @inject("UsersRepository")
         private usersRepository: IUsersRepository,
