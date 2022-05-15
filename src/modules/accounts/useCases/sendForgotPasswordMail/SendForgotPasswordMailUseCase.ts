@@ -44,4 +44,4 @@ class SendForgotPasswordMailUseCase {
     }
 }
 
-export { SendForgotPasswordMailUseCase };
+export { SendForgotPasswordMailUseCase }; 
