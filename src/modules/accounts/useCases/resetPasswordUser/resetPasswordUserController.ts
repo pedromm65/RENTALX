@@ -8,6 +8,8 @@ class ResetPasswordUserController {
         const resetPasswordUserUseCase = container.resolve(
             ResetPasswordUserUseCase
         );
+
+        return response.send();
     }
 }
 
