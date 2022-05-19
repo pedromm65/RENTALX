@@ -1,6 +1,9 @@
+import { hash } from "bcryptjs";
 import { inject, injectable } from "tsyringe";
 
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
+import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { AppError } from "@shared/errors/App.Error";
 
 interface IRequest {
@@ -12,7 +15,11 @@ interface IRequest {
 class ResetPasswordUserUseCase {
     constructor(
         @inject("UsersTokensRepository")
-        private usersTokensRepository: IUsersTokensRepository
+        private usersTokensRepository: IUsersTokensRepository,
+        @inject("DayjsDateProvider")
+        private dateProvider: IDateProvider,
+        @inject("UsersRepository")
+        private usersRepository: IUsersRepository
     ) {}
 
     async execute({ password, token }: IRequest) {
@@ -23,6 +30,23 @@ class ResetPasswordUserUseCase {
         if (!userToken) {
             throw new AppError("Invalid Token!");
         }
+
+        if (
+            this.dateProvider.compareIfBefore(
+                userToken.expires_date,
+                this.dateProvider.dateNow()
+            )
+        ) {
+            throw new AppError("Token expired!");
+        }
+
+        const user = await this.usersRepository.findById(userToken.user_id);
+
+        user.password = await hash(password, 8);
+
+        await this.usersRepository.create(user);
+
+        await this.usersTokensRepository.deleteById(userToken.id);
     }
 }
 
