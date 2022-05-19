@@ -1,5 +1,5 @@
 version: "3.9"
-
+   
 services:
   database:
     image: postgres
@@ -27,4 +27,4 @@ services:
 
 volumes:
   pgdata:
-    driver: local
+    driver: local 
