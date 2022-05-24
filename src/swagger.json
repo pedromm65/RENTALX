@@ -7,7 +7,7 @@
         "contact": {
             "email": "pedrohlimadev@gmail.com"
         } 
-    },  
+    },   
     "paths": {
         "/categories": {
             "post": {
