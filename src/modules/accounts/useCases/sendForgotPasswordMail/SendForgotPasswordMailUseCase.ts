@@ -1,21 +1,15 @@
-<<<<<<< HEAD
 import { resolve } from "path";
 import { inject, injectable } from "tsyringe";
 import { v4 as uuidv4 } from "uuid";
 
-=======
-import { inject, injectable } from "tsyringe"; 
-import { v4 as uuidv4 } from "uuid"; 
-   
->>>>>>> 9eb9abcf60b96deb1a5ccb8389206459b1e37383
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { IMailProvider } from "@shared/container/providers/MailProvider/IMailProvider";
 import { AppError } from "@shared/errors/App.Error";
- 
-@injectable() 
-class SendForgotPasswordMailUseCase { 
+
+@injectable()
+class SendForgotPasswordMailUseCase {
     constructor(
         @inject("UsersRepository")
         private usersRepository: IUsersRepository,
@@ -42,7 +36,7 @@ class SendForgotPasswordMailUseCase {
         if (!user) {
             throw new AppError("User does not exists!");
         }
-  
+
         const token = uuidv4();
 
         const expires_date = this.dateProvider.addHours(3);
@@ -65,6 +59,6 @@ class SendForgotPasswordMailUseCase {
             templatePath
         );
     }
-} 
- 
-export { SendForgotPasswordMailUseCase }; 
+}
+
+export { SendForgotPasswordMailUseCase };
