@@ -13,6 +13,7 @@
     "@types/csv-parse": "^1.2.2",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/uuid": "^8.3.3",
+    "aws-sdk": "^2.1198.0",
     "bcryptjs": "^2.4.3",
     "csv-parse": "^5.0.3",
     "dayjs": "^1.10.7",
