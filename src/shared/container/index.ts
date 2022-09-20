@@ -52,7 +52,3 @@ container.registerSingleton<IUsersTokensRepository>(
     UsersTokensRepository
 );
 
-container.registerInstance<IMailProvider>(
-    "EtherealMailProvider",
-    new EtherealMailProvider()
-);

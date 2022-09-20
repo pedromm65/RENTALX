@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
+import { RefreshTokenUseCase } from "./RefreshTokenUseCase";
 
 // eslint-disable-next-line import/no-unresolved
-import { RefreshTokenUseCase } from "./refreshTokenUseCase";
+
 
 class RefreshTokenController {
     async handle(request: Request, response: Response): Promise<Response> {

@@ -7,7 +7,7 @@ import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTok
 import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 import { IMailProvider } from "@shared/container/providers/MailProvider/IMailProvider";
 import { AppError } from "@shared/errors/App.Error";
- 
+
 @injectable()
 class SendForgotPasswordMailUseCase {
     constructor(
@@ -60,5 +60,5 @@ class SendForgotPasswordMailUseCase {
         );
     }
 }
- 
+
 export { SendForgotPasswordMailUseCase };
